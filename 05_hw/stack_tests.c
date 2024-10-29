@@ -215,12 +215,13 @@ int main() {
     test_searchByValue();
     test_createNode();
     test_initStack();
-    //test_destroyStack();
     test_push();
     test_searchByIndex();
     test_getTop();
     test_traverseStack();
 
+    test_destroyStack();
+    
     printf("All tests passed.\n");
 
     return 0;
