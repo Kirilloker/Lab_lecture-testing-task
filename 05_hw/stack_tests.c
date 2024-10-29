@@ -71,8 +71,7 @@ void test_searchByValue() {
     assert(result != NULL && result->data == 10);
 
     // Находим 10 в стеке (его нет в стеке)
-    result = searchByValue(&stack, 40);
-    assert(result == NULL);
+    assert(searchByValue(&stack, 40) == NULL);
 
     destroyStack(&stack);
 
@@ -157,8 +156,7 @@ void test_searchByIndex() {
     assert(result != NULL && result->data == 10);
 
     // Проверяем, что индекс, выходящий за пределы, возвращает NULL
-    result = searchByIndex(&stack, 3);
-    assert(result == NULL);
+    assert(searchByIndex(&stack, 3) == NULL);
 
     destroyStack(&stack);
 
@@ -221,7 +219,7 @@ int main() {
     test_traverseStack();
 
     test_destroyStack();
-    
+
     printf("All tests passed.\n");
 
     return 0;
