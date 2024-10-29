@@ -53,9 +53,38 @@ void test_isEmpty() {
     destroyStack(&stack);
 }
 
+void test_searchByValue() {
+    // Создаем стек: 30 - 20 - 10
+    Stack stack;
+    initStack(&stack);
+
+    push(&stack, 10);
+    push(&stack, 20);
+    push(&stack, 30);
+
+    // Находим 20 в стеке (есть в стеке)
+    Node* result = searchByValue(&stack, 20);
+    assert(result != NULL && result->data == 20);
+
+    // Находим 10 в стеке (есть в стеке)
+    result = searchByValue(&stack, 10);
+    assert(result != NULL && result->data == 10);
+
+    // Находим 10 в стеке (его нет в стеке)
+    result = searchByValue(&stack, 40);
+    assert(result == NULL);
+
+    printf("test_searchByValue passed.\n");
+
+    destroyStack(&stack);
+}
+
 int main() {
     test_isEmpty();
     test_pop();
+    test_searchByValue();
+
     printf("All tests passed.\n");
+    
     return 0;
 }
