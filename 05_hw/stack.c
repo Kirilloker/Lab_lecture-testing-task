@@ -3,6 +3,7 @@
 
 #include "stack.h"
 
+// TODO: если будет не достаток памяти, может быть ошибка 
 Node* createNode(int data) {
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->data = data;
