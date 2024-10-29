@@ -1,0 +1,32 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up CMake
+        uses: jwlawson/actions-setup-cmake@v1
+
+      - name: Install dependencies
+        run: sudo apt-get install -y gcc g++ cmake
+
+      - name: Configure CMake
+        run: cmake -B build -S 05_hw -DCMAKE_C_FLAGS="-fsanitize=address,undefined, leak -g"
+
+      - name: Build project
+        run: cmake --build build
+
+      - name: Run tests
+        run: ./build/stack_tests
