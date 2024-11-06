@@ -3,6 +3,7 @@
 
 #include "stack.h"
 
+// TODO: если будет не достаток памяти, может быть ошибка 
 Node* createNode(int data) {
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->data = data;
@@ -21,6 +22,7 @@ void destroyStack(Stack* stack) {
         current = current->next;
 	    free(tmp);
     }
+    stack->top = NULL;
 }
 
 void push(Stack* stack, int data) {
@@ -31,8 +33,12 @@ void push(Stack* stack, int data) {
 
 void pop(Stack* stack) {
     Node* temp = stack->top;
-    stack->top = stack->top->next;
+    if (temp != NULL) {
+        stack->top = stack->top->next;
+        free(temp);
+    }
 }
+
 
 Node* searchByValue(Stack* stack, int value) {
     Node* current = stack->top;
@@ -40,9 +46,11 @@ Node* searchByValue(Stack* stack, int value) {
         if (current->data == value) {
             return current;
         }
+        current = current->next; 
     }
     return NULL;
 }
+
 
 Node* searchByIndex(Stack* stack, int index) {
     Node* current = stack->top;
@@ -72,7 +80,6 @@ void traverseStack(Stack* stack) {
 }
 
 bool isEmpty(Stack* stack) {
-    free(stack->top);
     return stack->top == NULL;
 }
 
